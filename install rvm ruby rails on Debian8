@@ -1,0 +1,44 @@
+how to install specific version of Ruby and Rails via RVM (Ruby Version Manager)
+
+Since Debian8 does not host RVM package in official distro repository (it offers some old version of Rbenv instead),
+we have to install it from app servers - only for specific user account (not system wide).
+
+Log in as a user (rails server will be running with her system privileges)
+Install gnupg2 package:
+sudo apt-get install gnupg2
+Import RVM's server keys:
+curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+Install RVM:
+curl -L get.rvm.io | bash -s stable
+Load RVM: 
+source ~/.rvm/scripts/rvm
+Install system speciffic dependencies for Ruby:
+rvm requirements
+Install specific version of Ruby:
+rvm install x.y.z
+Check Ruby version:
+ruby -v
+Install Bundler:
+gem install bundler
+Install specific version of Rails:
+gem install rails -v x.y.z
+(Debian8) Install 'node.js' dependency for 'uglyfier' gem:
+sudo apt-get install nodejs
+(Debian7) If you're installing on Debian7 you have to:
+sudo curl -sL https://deb.nodesource.com/setup_5.x | bash -
+sudo apt-get install --yes nodejs
+Application #
+Install Git:
+sudo apt-get install git
+Clone application repository:
+git clone <application-repository-url>
+Go to application's directory:
+cd <application-home-dir
+Install gems:
+bundle install
+Initialize model/DB:
+rake db:migrate
+Start server (as daemon, detached from console) binded to specific IP address and port (defaults are: binding=localhost and port=3000):
+rails server -d --binding=192.168.35.10 --port=8080
+
+
