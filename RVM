@@ -1,0 +1,5 @@
+source ~/.rvm/scripts/rvm
+rvm use ruby 2.3.0
+rvm list
+RVM GEMSET LIST
+
