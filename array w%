@@ -1,0 +1,4 @@
+TSHIRT_SIZES = %w(XXS XS S M L XL 2XL 3XL)
+               ["XXS", "XS" ...]
+
+
