@@ -1,0 +1,8 @@
+git config user.name
+git config user.email
+
+git config --list
+
+git config --global user.name
+
+git config --global --unset-all user.name
