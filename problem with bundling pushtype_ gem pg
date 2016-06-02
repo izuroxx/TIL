@@ -1,0 +1,223 @@
+problem with bundling pushtype - gem pg
+
+
+
+
+resolve: sudo apt-get install libpq-dev
+http://stackoverflow.com/questions/6040583/cant-find-the-libpq-fe-h-header-when-trying-to-install-pg-gem
+
+
+
+steps in terminal
+
+
+
+
+1. trying to bundle cloned pushtype (after installing postgres ver 9.4 - steps form TIL/postgres_9_4_install_mint)
+
+vagrant@vm-rebecca ~/Desktop/PUSHTYPE/push_type $ bundle
+Fetching gem metadata from https://rubygems.org/...........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Resolving dependencies.........
+Using rake 11.1.2
+Using i18n 0.7.0
+Using json 1.8.3
+Using minitest 5.9.0
+Using thread_safe 0.3.5
+Using builder 3.2.2
+Using erubis 2.7.0
+Using mini_portile2 2.0.0
+Using rack 1.6.4
+Using mime-types-data 3.2016.0521
+Using arel 6.0.3
+Using addressable 2.4.0
+Using bcrypt 3.1.11
+Using bundler 1.11.2
+Using coffee-script-source 1.10.0
+Using execjs 2.7.0
+Using thor 0.19.1
+Using concurrent-ruby 1.0.2
+Using database_cleaner 1.4.1
+Using orm_adapter 0.5.0
+Using multi_json 1.12.1
+Using sass 3.4.22
+Using tilt 2.0.4
+Using sexp_processor 4.7.0
+Using highline 1.7.8
+Using htmlentities 4.3.4
+Installing pg 0.18.4 with native extensions
+
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    current directory: /home/vagrant/.rvm/gems/ruby-2.3.0/gems/pg-0.18.4/ext
+/home/vagrant/.rvm/rubies/ruby-2.3.0/bin/ruby -r ./siteconf20160602-8360-cbtxh6.rb extconf.rb
+checking for pg_config... yes
+Using config values from /usr/bin/pg_config
+You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side application.
+You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side application.
+checking for libpq-fe.h... no
+Can't find the 'libpq-fe.h header
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--without-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/home/vagrant/.rvm/rubies/ruby-2.3.0/bin/$(RUBY_BASE_NAME)
+	--with-pg
+	--without-pg
+	--enable-windows-cross
+	--disable-windows-cross
+	--with-pg-config
+	--without-pg-config
+	--with-pg_config
+	--without-pg_config
+	--with-pg-dir
+	--without-pg-dir
+	--with-pg-include
+	--without-pg-include=${pg-dir}/include
+	--with-pg-lib
+	--without-pg-lib=${pg-dir}/lib
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /home/vagrant/.rvm/gems/ruby-2.3.0/extensions/x86_64-linux/2.3.0/pg-0.18.4/mkmf.log
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /home/vagrant/.rvm/gems/ruby-2.3.0/gems/pg-0.18.4 for inspection.
+Results logged to /home/vagrant/.rvm/gems/ruby-2.3.0/extensions/x86_64-linux/2.3.0/pg-0.18.4/gem_make.out
+Using redcarpet 3.3.4
+Using selectize-rails 0.12.1
+Using breadcrumbs 0.1.7
+Using tzinfo 1.2.2
+Using nokogiri 1.6.7.2
+Using rack-test 0.6.3
+Using warden 1.2.6
+Using mime-types 3.1
+Using css_parser 1.4.1
+Using coffee-script 2.4.1
+Using sprockets 3.6.0
+Using dragonfly 1.0.12
+Using haml 4.0.7
+Using ruby_parser 3.8.2
+An error occurred while installing pg (0.18.4), and Bundler cannot continue.
+Make sure that `gem install pg -v '0.18.4'` succeeds before bundling.
+
+
+
+
+
+
+2.trying to install gem pg -v ´0.18.4´ before bundle
+
+
+gem install pg -v '0.18.4'
+Building native extensions.  This could take a while...
+ERROR:  Error installing pg:
+	ERROR: Failed to build gem native extension.
+
+    current directory: /home/vagrant/.rvm/gems/ruby-2.3.0/gems/pg-0.18.4/ext
+/home/vagrant/.rvm/rubies/ruby-2.3.0/bin/ruby -r ./siteconf20160602-8413-h31z7f.rb extconf.rb
+checking for pg_config... yes
+Using config values from /usr/bin/pg_config
+You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side application.
+You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side application.
+checking for libpq-fe.h... no
+Can't find the 'libpq-fe.h header
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--without-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/home/vagrant/.rvm/rubies/ruby-2.3.0/bin/$(RUBY_BASE_NAME)
+	--with-pg
+	--without-pg
+	--enable-windows-cross
+	--disable-windows-cross
+	--with-pg-config
+	--without-pg-config
+	--with-pg_config
+	--without-pg_config
+	--with-pg-dir
+	--without-pg-dir
+	--with-pg-include
+	--without-pg-include=${pg-dir}/include
+	--with-pg-lib
+	--without-pg-lib=${pg-dir}/lib
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /home/vagrant/.rvm/gems/ruby-2.3.0/extensions/x86_64-linux/2.3.0/pg-0.18.4/mkmf.log
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /home/vagrant/.rvm/gems/ruby-2.3.0/gems/pg-0.18.4 for inspection.
+Results logged to /home/vagrant/.rvm/gems/ruby-2.3.0/extensions/x86_64-linux/2.3.0/pg-0.18.4/gem_make.out
+
+
+3. open log in less to chech details
+
+
+vagrant@vm-rebecca ~/Desktop/PUSHTYPE/push_type $ less /home/vagrant/.rvm/gems/ruby-2.3.0/extensions/x86_64-linux/2.3.0/pg-0.18.4/mkmf.log
+
+	
+
+	3.1
+		less file:
+
+			find_executable: checking for pg_config... -------------------- yes
+
+			--------------------
+
+			find_header: checking for libpq-fe.h... -------------------- no
+
+			"gcc -o conftest -I/home/vagrant/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0/x86_64-linux -I/home/vagrant/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0/ruby/backward -I/home/vagrant/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat  -fPIC conftest.c  -L. -L/home/vagrant/.rvm/rubies/ruby-2.3.0/lib -Wl,-R/home/vagrant/.rvm/rubies/ruby-2.3.0/lib -L. -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/vagrant/.rvm/rubies/ruby-2.3.0/lib -L/home/vagrant/.rvm/rubies/ruby-2.3.0/lib -lruby  -lpthread -lgmp -ldl -lcrypt -lm   -lc"
+			checked program was:
+			/* begin */
+			1: #include "ruby.h"
+			2: 
+			3: int main(int argc, char **argv)
+			4: {
+			5:   return 0;
+			6: }
+			/* end */
+
+			"gcc -E -I/home/vagrant/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0/x86_64-linux -I/home/vagrant/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0/ruby/backward -I/home/vagrant/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat  -fPIC  conftest.c -o conftest.i"
+			conftest.c:3:22: fatal error: libpq-fe.h: No such file or directory
+			 #include <libpq-fe.h>
+			                      ^
+			compilation terminated.
+			checked program was:
+			/* begin */
+			1: #include "ruby.h"
+			2: 
+			3: #include <libpq-fe.h>
+			/* end */
+
+			--------------------
+
+			(END)
+
