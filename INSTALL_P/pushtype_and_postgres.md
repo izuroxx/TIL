@@ -8,7 +8,7 @@ Tutorial verified on:
 1. Update repositories:
 
         sudo apt-get update
-2. Install Postgresql, postggresql extensions and 1 development library: 
+2. Install Postgresql, its extensions and 1 development library: 
 
         sudo apt-get install postgresql postgresql-contrib libpq-dev
 3. Run postgresql command-line client: 
@@ -33,6 +33,9 @@ Tutorial verified on:
             local   all             all                                     trust
             host    all             all             127.0.0.1/32            trust
             host    all             all             ::1/128                 trust
+5. Realod Postgresql server:
+
+            service postgresql reload
 
 # New Rails app based on Postgresql
 1. Generate new dummy rails application with Postgres as DB storage
