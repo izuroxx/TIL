@@ -1,0 +1,120 @@
+
+
+1+2 is 1.+(2)
+
++   -   *   /   =   ==    !=    >   <   >=    <=    []
+
+words = ["foo", "bar", "baz"]
+words[1]
+
+words = ["foo", "bar", "baz"]
+words.[](1)
+
+['rock','paper','scissors'].index('paper')
+1
+
+2.between?(1,3)
+
+Array.new
+[]
+
+[]
+[]
+
+[1, 2, 3, 4, 5][2]
+3
+
+[1, 2, 3, 4, 5][-1]
+5
+
+[1, 2, 3, 4, 5] << 'woot' 
+[1, 2, 3, 4, 5].push('woot')
+[1, 2, 3, 4, 5, "woot"]
+
+
+In Ruby, the method map is used to transform the contents of an array 
+according to a specified set of rules defined inside the code block. 
+
+[1, 2, 3, 4, 5].map { |i| i + 1 }
+[2, 3, 4, 5, 6]
+
+# select even numbers
+[1,2,3,4,5,6].select {|number| number % 2 == 0}
+
+names = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+names.select {|name| name.length > 5}
+
+[1,2,3,4,5,6,7,8,9].delete_if{|num| num.even?}
+
+
+def array_copy(source)
+  destination = []
+  for sor in source 
+    if sor < 4 
+      destination << sor
+    end
+  end
+  return destination
+end
+
+
+restaurant_menu = {}
+# set the values for each item separately here:
+restaurant_menu['Dal Makhani'] = 4.5
+restaurant_menu['Tea'] = 2
+
+
+restaurant_menu = { "Ramen" => 3, "Dal Makhani" => 4, "Coffee" => 2 }
+# write the each loop here. 
+restaurant_menu.each do |item, price|
+  
+  price = price + (price*0.1)
+  restaurant_menu[item] = price
+ 
+end
+
+
+normal = Hash.new
+was_not_there = normal[:zig]
+puts "Wasn't there:"
+p was_not_there
+
+usually_brown = Hash.new("brown")
+pretending_to_be_there = usually_brown[:zig]
+puts "Pretending to be there:"
+p pretending_to_be_there
+
+STDOUT:
+
+Wasn't there:
+nil
+Pretending to be there:
+"brown"
+
+
+
+def artax
+  a = [:punch, 0]
+  b = [:kick, 72]
+  c = [:stops_bullets_with_hands, false]
+  key_value_pairs = [a,b,c]# you can do this. you are a champion.
+                    # unlike Artax, who gave up in a swamp.
+  
+  Hash[key_value_pairs]
+end
+p artax
+
+STDOUT:
+
+{:punch=>0, :kick=>72, :stops_bullets_with_hands=>false}
+
+
+
+classes
+
+
+puts 1.is_a?(Integer)
+puts 1.is_a?(String)
+
+
+

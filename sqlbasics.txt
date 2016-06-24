@@ -1,0 +1,52 @@
+
+    CREATE TABLE creates a new table.
+    INSERT INTO adds a new row to a table.
+    SELECT queries data from a table.
+    UPDATE edits a row in a table.
+    ALTER TABLE changes an existing table.
+    DELETE FROM deletes rows from a table.
+
+    
+
+    SELECT is the clause you use every time you want to query information from a database.
+
+    WHERE is a popular command that lets you filter the results of the query based on conditions that you specify.
+
+    LIKE and BETWEEN are special operators that can be used in a WHERE clause
+
+    AND and OR are special operators that you can use with WHERE to filter the query on two or more conditions.
+
+    ORDER BY lets you sort the results of the query in either ascending or descending order.
+
+    LIMIT lets you specify the maximum number of rows that the query will return. This is especially important in large tables that have thousands or even millions of rows.
+
+
+SELECT DISTINCT genre FROM movies;
+SELECT DISTINCT is used to return unique values in the result set. It filters out all duplicate values. 
+
+SELECT * FROM movies
+WHERE name LIKE 'A%
+
+LIKE is not case sensitive
+
+SELECT * FROM movies
+WHERE name BETWEEN 'A' AND 'J'
+
+The BETWEEN operator is used to filter the result set within a certain range. The values can be numbers, text or dates
+
+SELECT * FROM movies
+WHERE year BETWEEN 1990 AND 2000
+AND genre = 'comedy';
+
+SELECT * FROM movies
+WHERE genre = 'comedy'
+OR year < 1980;
+
+SELECT * FROM movies
+ORDER BY imdb_rating DESC; 
+
+
+SELECT * FROM movies
+ORDER BY imdb_rating DESC
+LIMIT 3;
+
