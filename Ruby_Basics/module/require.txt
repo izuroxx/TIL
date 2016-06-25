@@ -1,4 +1,30 @@
  
  You should use require_relative when the file you need to load exists somewhere relative to the file that calls for the loading. 
 
- Reserve require for "external" dependencies
+ Reserve require for "external" dependencies.
+
+ prepend - obiekt najpierw przeszukuje dolączona moduł, potem klasę
+ include - obiekt najpierw przeszukuje klase.
+
+
+
+ *Demonstracja właczania modułu i dziedziczenia
+
+ module M
+  def report
+  	puts "metoda report jest w module M"
+  end
+end
+
+class C
+	include M
+end
+
+class D < C
+end
+
+obj = D.new
+obj.report  
+
+
+
