@@ -1,0 +1,4 @@
+ 
+ You should use require_relative when the file you need to load exists somewhere relative to the file that calls for the loading. 
+
+ Reserve require for "external" dependencies
