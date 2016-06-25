@@ -1,0 +1,7 @@
+słowo kluczowe super zapewnia sposób wywołania tego, co byłoby właściwą wersją metody w sytuacjach, w których została ona później przesłonięta w ścieżce wyszukiwania.
+
+Super wywołane bez listy argumentów  powoduje automatyczne skierowanie przekazanych argumentów do metody, z której zostało ono wywołane.
+
+super wywołane z pusta lista argumentów super() nie wysyła żadnych argumentów do wyżej połozonej metody nawet wtedy, gdy bieżącej metodzie przekazano argumenty
+
+super wywołane z konkretnymi argumentami super(a,b,c) powoduje wysłanie tylko tych argumentów

@@ -3,7 +3,7 @@
 
  Reserve require for "external" dependencies.
 
- prepend - obiekt najpierw przeszukuje dolączona moduł, potem klasę
+ prepend - obiekt najpierw przeszukuje dolączona moduł, potem klasę 
  include - obiekt najpierw przeszukuje klase.
 
 
