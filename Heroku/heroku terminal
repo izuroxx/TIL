@@ -6,8 +6,36 @@ heroku login
 
 heroku create
 
-heroku rename name --app murmuring-hamlet-64190
+heroku rename newname --app originalherokuappname
+
+heroku apps:destroy --app appname --confirm appname
 
 
-murmuring-hamlet-64190
-https://murmuring-hamlet-64190.herokuapp.com/ | https://git.heroku.com/murmuring-hamlet-64190.git
+version controll + heroku
+git add .
+git commit -am 'comment'
+git push origin master
+git push heroku master
+
+
+
+
+before git push heroku master:
+
+changes in /Gemfile for heroku
+
+delete line gem 'sqlite3'
+add lines at the bottom:
+group :development, :test do
+	gem 'sqlite3'
+end
+
+group :production do
+	gem 'pg', '0.18.2'
+	gem 'rails_12factor', '0.0.3'
+end
+
+important: in terminal:
+$ bundle install --without production
+now ready for 'git push heroku master'
+
