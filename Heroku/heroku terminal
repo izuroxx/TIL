@@ -1,0 +1,13 @@
+heroku --version
+
+heroku login
+
+(heroku keys:add)
+
+heroku create
+
+heroku rename name --app murmuring-hamlet-64190
+
+
+murmuring-hamlet-64190
+https://murmuring-hamlet-64190.herokuapp.com/ | https://git.heroku.com/murmuring-hamlet-64190.git
