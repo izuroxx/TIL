@@ -1,6 +1,9 @@
 todo:
 
-* get more familiar with slim
+* get more familiar with slim issue #455
+
 * check scope for github_handle & all other github dependancies - issue #413
 	(write method?github_handle?? params, unchangable fieled)
-* chceck whats with conferenc save - issue #455
+
+* check whats with conference - issue #455
+* 
