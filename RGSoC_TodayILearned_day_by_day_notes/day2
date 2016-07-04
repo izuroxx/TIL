@@ -9,3 +9,5 @@ todo:
 * 
 
 Chceck documentation for Devise omniauth
+
+getting to know some methods - like extend, include, prepend
