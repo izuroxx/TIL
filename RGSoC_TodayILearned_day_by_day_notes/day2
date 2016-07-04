@@ -16,13 +16,19 @@ todo:
 
 *** getting to know some methods - like extend, include, prepend
 
+include - najpierw klasa, potem modul
+prepend - najpierw model potem klasa
 
 
 
 
 *** ActiveSupport::Concern
 
-https://richonrails.com/articles/rails-4-code-concerns-in-active-record-models
+(chceck: WHEN to INCLUDE?)
+
+from https://richonrails.com/articles/rails-4-code-concerns-in-active-record-models
+
+
 Ruby on Rails Concerns This tutorial will teach you how to use ActiveModel concerns in Ruby on Rails.
 
 You may have noticed that Rails 4 creates a new folder called concerns. Concerns are pieces of code that allow you to better organize the code that you write. This feature has actually been around for a long time prior to Rails 4, Rails 4 merely creates the folders for you and sets up the environment. In this article, we focus primarily on Rails 4.0, but it should apply equally to 3.2.x or even 3.0.x and earlier.
