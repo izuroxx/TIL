@@ -1,9 +1,14 @@
+chcek: 
+delegate scope rescue try base.extend super
+
 todo:
 
 *** get more familiar with slim issue #455
 
 *** check scope for github_handle & all other github dependancies - issue #413
 	(write method?github_handle?? params, unchangable fieled, validation for creating new user)
+
+	Q: does complete_from_github method in user.rb private methods updates info about user - email!!!!!!!!!!!!!!
 
 
 		Github commment: Possible fix: Github handle used for sign up should not be editable and email should be verified.
