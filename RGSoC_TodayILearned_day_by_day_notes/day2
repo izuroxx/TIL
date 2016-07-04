@@ -11,3 +11,18 @@ todo:
 Chceck documentation for Devise omniauth
 
 getting to know some methods - like extend, include, prepend
+
+ActiveSupport::Concern
+
+go deeper into modules
+mixins
+
+
+Modules are a way of grouping together methods, classes, and constants. Modules give you two major benefits.
+
+Modules provide a namespace and prevent name clashes.
+
+Modules implement the mixin facility.
+
+Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants.
+
