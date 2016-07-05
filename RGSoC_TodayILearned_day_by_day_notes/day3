@@ -81,3 +81,25 @@ end
 
 rake db:migrate:status
 bundle exec rake db:reset
+Using def change means you should write migrations that are reversible. And change_column is not reversible. You can go up but you cannot go down, since change_column is irreversible.
+
+Instead, though it may be a couple extra lines, you should use def up and def down
+
+So if you have a column with no default value, then you should do this to add a default value.
+
+def up
+  change_column :users, :admin, :boolean, default: false
+end
+
+def down
+  change_column :users, :admin, :boolean, default: nil
+end
+Or if you want to change the default value for an existing column.
+
+def up
+  change_column :users, :admin, :boolean, default: false
+end
+
+def down
+  change_column :users, :admin, :boolean, default: true
+end
