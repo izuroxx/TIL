@@ -77,3 +77,7 @@ class ChangeApplicationMinimumMoneyToTextOnUsers < ActiveRecord::Migration
     change_column :users, :application_minimum_money, :string
   end
 end
+
+
+rake db:migrate:status
+bundle exec rake db:reset
