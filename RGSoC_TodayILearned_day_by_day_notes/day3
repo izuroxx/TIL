@@ -7,46 +7,73 @@ plan for today:
 		check changing default value for tickets in  conferences model
 			change_column :conferences, :tickets, :integer, :default => 0
 			change_column_default(table_name, column_name, default) public
-3.4 Using the change Method
-The change method removes the need to write both up and down methods in those cases that Rails know how to revert the changes automatically. Currently, the change method supports only these migration definitions:
 
-add_column
-add_index
-add_timestamps
-create_table
-remove_timestamps
-rename_column
-rename_index
-rename_table
-If you’re going to need to use any other methods, you’ll have to write the up and down methods instead of using the change method.
+			exc.from http://guides.rubyonrails.org/v3.2/migrations.html
+			3.4 Using the change Method
+			The change method removes the need to write both up and down methods in those cases that Rails know how to revert the changes automatically. Currently, the change method supports only these migration definitions:
 
-3.5 Using the up/down Methods
-The down method of your migration should revert the transformations done by the up method. In other words, the database schema should be unchanged if you do an up followed by a down. For example, if you create a table in the up method, you should drop it in the down method. It is wise to reverse the transformations in precisely the reverse order they were made in the up method. For example,
+			add_column
+			add_index
+			add_timestamps
+			create_table
+			remove_timestamps
+			rename_column
+			rename_index
+			rename_table
+			If you’re going to need to use any other methods, you’ll have to write the up and down methods instead of using the change method.
 
-class ExampleMigration < ActiveRecord::Migration
+			3.5 Using the up/down Methods
+			The down method of your migration should revert the transformations done by the up method. In other words, the database schema should be unchanged if you do an up followed by a down. For example, if you create a table in the up method, you should drop it in the down method. It is wise to reverse the transformations in precisely the reverse order they were made in the up method. For example,
+
+			class ExampleMigration < ActiveRecord::Migration
+			  def up
+			    create_table :products do |t|
+			      t.references :category
+			    end
+			    #add a foreign key
+			    execute <<-SQL
+			      ALTER TABLE products
+			        ADD CONSTRAINT fk_products_categories
+			        FOREIGN KEY (category_id)
+			        REFERENCES categories(id)
+			    SQL
+			    add_column :users, :home_page_url, :string
+			    rename_column :users, :email, :email_address
+			  end
+			 
+			  def down
+			    rename_column :users, :email_address, :email
+			    remove_column :users, :home_page_url
+			    execute <<-SQL
+			      ALTER TABLE products
+			        DROP FOREIGN KEY fk_products_categories
+			    SQL
+			    drop_table :products
+			  end
+			end
+			Sometimes your migration will do something which is just plain irreversible; for example, it might destroy some data. In such cases, you can raise ActiveRecord::IrreversibleMigration from your down method. If someone tries to revert your migration, an error message will be displayed saying that it can’t be done.
+
+
+
+
+
+class AddRoundToConferences < ActiveRecord::Migration
   def up
-    create_table :products do |t|
-      t.references :category
-    end
-    #add a foreign key
-    execute <<-SQL
-      ALTER TABLE products
-        ADD CONSTRAINT fk_products_categories
-        FOREIGN KEY (category_id)
-        REFERENCES categories(id)
-    SQL
-    add_column :users, :home_page_url, :string
-    rename_column :users, :email, :email_address
+    add_column :conferences, :round, :integer, default: 1
   end
- 
+
   def down
-    rename_column :users, :email_address, :email
-    remove_column :users, :home_page_url
-    execute <<-SQL
-      ALTER TABLE products
-        DROP FOREIGN KEY fk_products_categories
-    SQL
-    drop_table :products
+    remove_column :conferences, :round, :integer
   end
 end
-Sometimes your migration will do something which is just plain irreversible; for example, it might destroy some data. In such cases, you can raise ActiveRecord::IrreversibleMigration from your down method. If someone tries to revert your migration, an error message will be displayed saying that it can’t be done.
+
+
+class ChangeApplicationMinimumMoneyToTextOnUsers < ActiveRecord::Migration
+  def up
+    change_column :users, :application_minimum_money, :text
+  end
+
+  def down
+    change_column :users, :application_minimum_money, :string
+  end
+end
