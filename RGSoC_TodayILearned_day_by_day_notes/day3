@@ -81,6 +81,8 @@ end
 
 rake db:migrate:status
 bundle exec rake db:reset
+
+
 Using def change means you should write migrations that are reversible. And change_column is not reversible. You can go up but you cannot go down, since change_column is irreversible.
 
 Instead, though it may be a couple extra lines, you should use def up and def down

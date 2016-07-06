@@ -1,0 +1,68 @@
+Searching 0 files for "bank"
+
+0 matches
+
+Searching 0 files for "banking"
+
+0 matches
+
+Searching 0 files for "banking_info"
+
+0 matches
+
+Searching 1195 files for "banking_info"
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/app/controllers/application_drafts_controller.rb:
+   93            :application_coding_level, :application_community_engagement, :application_learning_period, :application_language_learning_period,
+   94            :application_learning_history, :application_skills, :application_code_background, :application_goals,
+   95:           :application_code_samples, :application_location, :banking_info, :application_minimum_money, :application_money
+   96        )
+   97      else
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/app/controllers/users_controller.rb:
+   86          :github_handle, :twitter_handle, :irc_handle,
+   87          :name, :email, :homepage, :location, :bio,
+   88:         :tshirt_size, :banking_info, :postal_address, :timezone,
+   89          :country,
+   90          :hide_email,
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/app/views/users/show.html.slim:
+   66  
+   67    - if can_see_private_info?
+   68:     - fields = ['tshirt_size', 'postal_address', 'banking_info']
+   69      .well.private-info
+   70        h3 Private info
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/app/views/users_info/index.html.slim:
+   34          td = user.email
+   35          td = user.tshirt_size
+   36:         td = simple_format user.banking_info
+   37          td = simple_format user.postal_address
+   38  
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/config/locales/en.yml:
+   60          misc_info: Anything else to add?
+   61  
+   62:         student0_banking_info: Banking Information (1st student)
+   63:         student1_banking_info: Banking Information (2nd student)
+   64          project_url: Project URL
+   65          coaches_hours_per_week: "Coaches' Hours-per-Week"
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/db/migrate/20130716132159_users_add_banking_info.rb:
+    1  class UsersAddBankingInfo < ActiveRecord::Migration
+    2    def change
+    3:     add_column :users, :banking_info, :text
+    4    end
+    5  end
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/db/schema.rb:
+  268      t.string   "irc_handle",                           limit: 255
+  269      t.string   "tshirt_size",                          limit: 255
+  270:     t.text     "banking_info"
+  271      t.text     "postal_address"
+  272      t.string   "timezone",                             limit: 255
+
+/home/vagrant/Desktop/RGSOC_my/rgsoc-teams/log/development.log:
+    <binary>
+
+32 matches across 8 files
