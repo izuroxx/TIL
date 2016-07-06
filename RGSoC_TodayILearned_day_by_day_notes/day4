@@ -74,3 +74,5 @@ class UsersAddBankingInfo < ActiveRecord::Migration
     3:     add_column :users, :banking_info, :text
     4    end
     5  end
+
+    
