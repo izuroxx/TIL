@@ -1,0 +1,117 @@
+STRONG PARAMETERS
+
+http://blog.trackets.com/2013/08/17/strong-parameters-by-example.html
+
+
+*Let’s start by taking a look at how strong_parameters actually work. On a superficial level, every 
+request wraps its params in ActionController::Parameters, which allows you to whitelist specific keys.
+
+If we try to use them directly without whitelisting in mass assignment, we’ll get ActiveModel::ForbiddenAttributesError.
+params = ActionController::Parameters.new(username: "john")
+User.new(params)
+# => ActiveModel::ForbiddenAttributesError
+To make this work, we just need to whitelist the attributes we want in the mass assignment and Rails will be happy
+
+params = ActionController::Parameters.new(username: "john")
+> User.new(params.permit(:username))
+We don’t have to whitelist all of the attributes though, but we’ll get a warning if we miss some of them
+
+params = ActionController::Parameters.new(username: "john", password: "secret")
+params.permit(:username)
+# Unpermitted parameters: password
+# => { "username" => "john" }
+We can even chain them together and build up the filter, as every call to permit will return an instance of ActionController::Parameters
+
+params = ActionController::Parameters.new(username: "john", password: "secret")
+params.permit(:username, :password).permit(:username)
+# Unpermitted parameters: password
+# => { "username" => "john" }
+Using permit won’t mind if the permitted attribute is missing
+
+params = ActionController::Parameters.new(username: "john", password: "secret")
+params.permit(:username, :password, :foobar)
+# => { "username" => "john", "password" => "secret" }
+Which can be good, but sometimes we do want to require a specific parameter to be present. We can do that by using require instead of permit, which will raise
+
+params.require(:foobar)
+# ActionController::ParameterMissing: param not found: foobar
+There’s one thing different about require, and that’s it returns the actual value of the parameter, unlike permit which returns the actual hash.
+
+params = ActionController::Parameters.new(username: "john")
+params.permit(:username)
+# => { "username" => "john" }
+params.require(:username)
+# => "john"
+This becomes useful when we have nested parameters, as we almost always have when using forms, for example
+
+params = ActionController::Parameters.new(user: { username: "john" })
+params.require(:user)
+# => { "username" => "john" }
+params.require(:user).permit(:username)
+# => { "username" => "john" }
+You might be asking what’s the difference here, since they both return the same thing … well not exactly
+
+params.require(:user).permitted?
+# => false
+params.require(:user).permit(:username).permitted?
+# => true
+This simply means that if you try to use the first case in mass assignment you’ll end up getting ActiveModel::ForbiddenAttributesError.
+
+With this knowledge, we can already convert our attr_accessible to strong_parameters in most of the cases.
+
+# model
+class User < ActiveRecord::Base
+  attr_accessible :username
+end
+
+# controller
+def create
+  User.create!(params[:user])
+end
+Now let’s transform the code using strong_parameters.
+
+# model
+class User < ActiveRecord::Base
+end
+
+# controller
+def create
+  User.create!(params.require(:user).permit(:username))
+end
+If you are using any form of nested attributes, be it the Rails’ accepts_nested_attributes_for or just simply sending along some nested form data, we need to tell strong_parameters about it, as by default permit only allows scalar values, no hashes or arrays.
+
+Let’s start with the simpler of those two, arrays. If we simply use permit on an attribute with array value, it will behave as if we didn’t permit it at all.
+
+params = ActionController::Parameters.new(usernames: ["john", "kate"])
+params.permit(:usernames)
+# Unpermitted parameters: usernames
+# => { }
+To solve this we simply tell strong_parameters that the key is an array
+
+params = ActionController::Parameters.new(usernames: ["john", "kate"])
+params.permit(usernames: [])
+# => { "usernames" => ["john", "kate"] }
+Doing this with hashes is very similar, we just have to name all of the keys contained in the hash
+
+params = ActionController::Parameters.new(user: { username: "john" })
+params.permit(user: [ :username ])
+# => { "user" => {"username"=>"john"} }
+As you can see this is different from using require, since that will only return the nested hash and not the parent one.
+
+params.require(:user).permit(:username)
+# => { "username" => "john" }
+There’s one last problem with this. We can’t easily permit nested attributes when we don’t know the exact key names. This can happen for example if you’re expecting custom JSON data which can be of any format and you’re storing it using the new Rails 4 JSON support in a PostgreSQL database.
+
+params = ActionController::Parameters.new(user: { username: "john", data: { foo: "bar" } })
+# let's assume we can't do this because the data hash can contain any kind of data
+params.require(:user).permit(:username, data: [ :foo ])
+
+# we need to use the power of ruby to do this "by hand"
+params.require(:user).permit(:username).tap do |whitelisted|
+  whitelisted[:data] = params[:user][:data]
+end
+# Unpermitted parameters: data
+# => { "username" => "john", "data" => {"foo"=>"bar"} }
+There’s a GitHub issue for this but as mentioned in the issue comments this is by design and you can easily solve it using Ruby magic, as we showed above.
+
+We hope this article will make it easier for you to get the hang of strong_parameters and its sometimes not so obvious edge cases. Leave us a comment if you have any questions, tips or a missing use case. We’ll happily add it to the article.

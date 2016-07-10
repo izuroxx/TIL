@@ -1,0 +1,12 @@
+git config --global core.excludesfile ~/.gitignore_global
+
+1. revert to previous commit
+2. update fork
+3. branch? feature? 
+
+
+class RemoveBankingInfoFromUsers < ActiveRecord::Migration
+  def change
+  	remove_column :users, :banking_info, :text
+  end
+end
